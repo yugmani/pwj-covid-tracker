@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COVID Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>COVID-19 Tracker</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
     <div id="nav">
@@ -13,20 +14,12 @@
     <div class="map-info">
         <div id="map"></div>
 
-    </div>
-    <div class="data-info">
+        </div>
+        <div class="data-info">
 
     </div>
-    <script>
-        var map;
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
-          });
-        }
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHDPagRjUSdAB6FsVW6xi2RaoYRhZMv2c&callback=initMap"
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkJLSTy_d7Y_EarIbeAad_1Ppm00zAF-Q&callback=initMap"
       async defer></script>
+      <script src="script.js"></script>
 </body>
 </html>

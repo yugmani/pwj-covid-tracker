@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+}
+
+#nav {
+    background-color: blue;
+    height: 50px;
+}
+
+#map  {
+    width: 100%;
+    height: 100%;
+}
+
+.map-info {
+    background-color: bisque;
+    height: 400px;
+}
+
+.data-info {
+    background-color: coral;
+    height: 700px;
+}
+
+.info-container {
+   width:150px;
+   text-align:center;
+
+}
+
+.country-flag {
+    margin:0 auto;
+    height:80px;
+    width:100%;
+    /* background-image:url(https://diseas.sh/assets/img/flags/uslpng); */
+    /* background-size:cover; */
+    border-radius:8px;
+    overflow: hidden;
+}
+
+.info-name {
+    margin-top:10px 0px 5px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color:#555;
+    /* padding-bottom:5px; */
+    border-bottom:1px solid gray;
+}
+
+.info-recovered, .info-confirmed, .info-deaths  {
+    font-size:16px;
+    margin-top:5px;
+}
+
+.country-flag img {
+    max-width:100%;
+    border-radius: 5px;
+}
+
+
+
