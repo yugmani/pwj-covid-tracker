@@ -5,6 +5,7 @@ var map;
 
 window.onload = () =>{
     getCountryData();
+    
 }
 
 function initMap() {
@@ -22,8 +23,9 @@ const getCountryData = ()=>{
         // console.log(response);
         return response.json();
     }).then((data)=>{
-        console.log(data);
+        // console.log(data);
         showDataOnMap(data);
+        showDataInTable(data);
     })
 }
 
@@ -77,9 +79,20 @@ const showDataOnMap = (data)=>{
         google.maps.event.addListener(countryCircle, "mouseout", function(){
             infoWindow.close();
         })
-
-        //   markers.push(marker);
         
     })
 }
 
+const showDataInTable = (data) =>{
+    var html = "";
+    data.forEach((country) => {
+        html += `
+            <tr>
+                <td>${country.country}</td>
+                <td>${country.cases}</td>
+                <td>${country.recovered}</td>
+                <td>${country.deaths}</td>
+            </tr>`
+    })
+    document.getElementById("table-data").innerHTML = html;
+}

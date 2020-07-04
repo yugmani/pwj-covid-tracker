@@ -18,8 +18,26 @@ body {
 }
 
 .data-info {
-    background-color: coral;
+    /* background-color: coral; */
     height: 700px;
+    display:flex;
+    justify-content: space-around;
+
+}
+
+.country-data {
+    width:45%;
+    margin-top:20px;
+    overflow-y: scroll;
+    margin-left:10px;
+
+}
+
+#graph-info {
+    width:45%;
+    margin-top:20px;
+    background-color:lightgray;
+    margin-right:10px;
 }
 
 .info-container {
