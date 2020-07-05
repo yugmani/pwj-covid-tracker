@@ -30,14 +30,17 @@ body {
     margin-top:20px;
     overflow-y: scroll;
     margin-left:10px;
-
 }
 
 #graph-info {
+    text-align:center;
     width:48%;
     margin-top:20px;
     background-color:lightgray;
     margin-right:10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly
 }
 
 .info-container {
@@ -47,13 +50,12 @@ body {
 }
 
 .country-flag {
-    /* margin:0 auto; */
     max-height:50%;
     min-width:100%;
-    /* background-size:cover;
-    background-repeat:no-repeat; */
     border-radius:8px;
     /* overflow: hidden; */
+    /* background-size:cover;
+    background-repeat:no-repeat; */
 }
 
 .info-name {
@@ -74,6 +76,17 @@ body {
     max-width:100%;
     border-radius: 5px;
 }
+
+
+#line-chart, #pie-chart {
+    height:50%;
+    padding:15px;
+}
+
+#line-chart {
+    border-bottom:3px solid #FFFAFA;
+}
+
 
 
 

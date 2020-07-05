@@ -1,3 +1,6 @@
+
+// MAPYSTYLE ARRAY OBJECT
+
 var mapStyle = [
     {
       "elementType": "geometry",

@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COVID-19 Tracker</title>
-    <link rel="stylesheet" href="./assets/style.css">
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
+    <link rel="stylesheet" href="./assets/style.css">
     <script src="./assets/map-style.js"></script>
+    <script src="script_pie.js"></script>
+    <script src="script_alter.js"></script>
     <script src="script.js"></script>
+    
 </head>
 <body>
+
+    <!--Navigation bar-->
     <div id="nav">
 
     </div>
+
+    
     <div class="map-info">
+        
+        <!--Google-Map container --->
         <div id="map"></div>
 
         </div>
+
+        <!--Table for Countrywise data-->
         <div class="data-info">
             <div class="country-data">
             <table class="table table-striped" >
@@ -52,10 +65,16 @@
                 </tbody>
               </table>
             </div>
+
+            <!--Graph Container-->
             <div id="graph-info">
-              <canvas id="myChart"></canvas>
+              <h2>Historical Data Comparison</h2>
+              <canvas id="line-chart"></canvas>
+              <h2>Continental Comparison</h2>
+              <canvas id="pie-chart"></canvas>
             </div>
         </div>
+        
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkJLSTy_d7Y_EarIbeAad_1Ppm00zAF-Q&callback=initMap"
         async defer></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

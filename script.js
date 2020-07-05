@@ -1,24 +1,27 @@
+
+// TO INITIALIZE GOOGLE MAP WITH COVID-19 DATA
+
 var map;
-// var infoWindow;
 
-
-
+// INITIALIZING FUNCTIONS WHILE LOADING WINDOW
 window.onload = () =>{
     getCountryData();
     // buildChart();
     getHistoricalData();
+    getContinentData() ;
 }
 
+// INITIALIZE GOOGLE MAP
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 39.8283, lng: -98.5795},
-    zoom:3,
-    styles: mapStyle
-  });
-
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 39.8283, lng: -98.5795},
+        zoom:3,
+        styles: mapStyle
+    });
 
 }
 
+// GETTING DATA COUNTRYWISE COVID-19 DATA FROM API
 const getCountryData = ()=>{
     fetch("https://corona.lmao.ninja/v2/countries")
     .then((response)=>{
@@ -31,6 +34,7 @@ const getCountryData = ()=>{
     })
 }
 
+// SHOWING DATA ON GOOGLE-MAP
 const showDataOnMap = (data)=>{
     data.map((country)=>{
         let countryCenter = {
@@ -38,6 +42,7 @@ const showDataOnMap = (data)=>{
             lng: country.countryInfo.long
         }
 
+        // CIRCLE-MARKER STYLING
         var countryCircle = new google.maps.Circle({
           strokeColor: "#FF0000",
           strokeOpacity: 0.8,
@@ -49,6 +54,8 @@ const showDataOnMap = (data)=>{
           radius: country.casesPerOneMillion * 15
         });
 
+
+        // INSERT DATA INTO INFO-WINDOW AND STYLING
         // style="background-image:url(${country.countryInfo.flag});"
         var html = `
                 <div class="info-container">
@@ -73,6 +80,7 @@ const showDataOnMap = (data)=>{
             position: countryCircle.center
         });
 
+        // EVENT LISTENERS ON MOUSEOVER AND MOUSEOUT
         google.maps.event.addListener(countryCircle, 'mouseover', function() {
             // infoWindow.setContent(html);
             infoWindow.open(map);
@@ -85,6 +93,7 @@ const showDataOnMap = (data)=>{
     })
 }
 
+// CREATING TABLE OF COUNTRYWISE DATA
 const showDataInTable = (data) =>{
     var html = "";
     data.forEach((country) => {
@@ -97,81 +106,4 @@ const showDataInTable = (data) =>{
                 </tr>`
     })
     document.getElementById("table-data").innerHTML = html;
-}
-
-
-const getHistoricalData = ()=>{
-    fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=90")
-    .then((response)=>{
-        // console.log(response);
-        return response.json();
-    }).then((data)=>{
-        // console.log(data);
-        let chartData = buildChartData(data);
-        buildChart(chartData);
-    })
-}
-
-const buildChartData = (data)=>{
-    let chartData = [];
-    for(let date in data.cases){
-        let newDataPoint = {
-            x: date,
-            y: data.cases[date]
-        }
-        chartData.push(newDataPoint);
-    }
-    // console.log(chartData);
-    return chartData;
-}
-
-
-const buildChart = (chartData)=>{
-    var timeFormat = 'MM/DD/YY';
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'Total Cases',
-                // backgroundColor: '#1d2c4d',
-                borderColor: '#00CED1',
-                data: chartData
-            }]
-        },
-
-        // Configuration options go here
-        options: {
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                xAxes: [{
-                    type: "time",
-                    time: {
-                        format: timeFormat,
-                        tooltipFormat: "ll"
-                    }, 
-                    scaleLable: {
-                        display: true,
-                        lableString: 'Date'
-                    }
-
-                }],
-                yAxes: [{
-                    ticks: {
-                        // Include a dollar sign in the ticks
-                        callback: function(value, index, values) {
-                            return numeral(value).format('0, 0');
-                        }
-                    }
-                }]
-            }
-        }
-    });
 }
