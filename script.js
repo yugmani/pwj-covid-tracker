@@ -2,24 +2,52 @@
 // TO INITIALIZE GOOGLE MAP WITH COVID-19 DATA
 
 var map;
+var mapStyle;
+var infoWindow;
+var mapStyle = mapRetro;
+let coronaGlobalData;
+// var mapStyle = mapNavy;
+const mapCircles = [];
+var casesTypeColors = {
+    cases:'#1d2c4d',
+    active:'#9d80fe',
+    recovered:'#7dd71d',
+    deaths:'#fb4443'
+}
 
 // INITIALIZING FUNCTIONS WHILE LOADING WINDOW
 window.onload = () =>{
     getCountryData();
     // buildChart();
     getHistoricalData();
-    getContinentData() ;
+    getContinentData();
+    // getWorldCoronaData();
 }
 
 // INITIALIZE GOOGLE MAP
 function initMap() {
+    // toggleStyle();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39.8283, lng: -98.5795},
-        zoom:3,
+        zoom:2,
         styles: mapStyle
     });
-
+    infoWindow = new google.maps.InfoWindow();
 }
+
+const changeDataSelection = (casesType)=>{
+    // console.log(mapCircles);
+    clearTheMap();
+    showDataOnMap(coronaGlobalData, casesType);
+}
+
+
+const clearTheMap = ()=> {
+    for(let circle of mapCircles){
+        circle.setMap(null);
+    }
+}
+
 
 // GETTING DATA COUNTRYWISE COVID-19 DATA FROM API
 const getCountryData = ()=>{
@@ -29,13 +57,14 @@ const getCountryData = ()=>{
         return response.json();
     }).then((data)=>{
         // console.log(data);
+        coronaGlobalData = data;
         showDataOnMap(data);
         showDataInTable(data);
     })
 }
 
 // SHOWING DATA ON GOOGLE-MAP
-const showDataOnMap = (data)=>{
+const showDataOnMap = (data, casesType="cases")=>{
     data.map((country)=>{
         let countryCenter = {
             lat: country.countryInfo.lat,
@@ -44,15 +73,18 @@ const showDataOnMap = (data)=>{
 
         // CIRCLE-MARKER STYLING
         var countryCircle = new google.maps.Circle({
-          strokeColor: "#FF0000",
+          strokeColor: casesTypeColors[casesType],
           strokeOpacity: 0.8,
           strokeWeight: 2,
-          fillColor: "#FF0000",
+          fillColor: casesTypeColors[casesType],
           fillOpacity: 0.35,
           map: map,
           center: countryCenter,
-          radius: country.casesPerOneMillion * 15
+          radius:country[casesType]
+        //   radius: country.casesPerOneMillion * 15
         });
+
+        mapCircles.push(countryCircle);
 
 
         // INSERT DATA INTO INFO-WINDOW AND STYLING
@@ -107,3 +139,26 @@ const showDataInTable = (data) =>{
     })
     document.getElementById("table-data").innerHTML = html;
 }
+
+ 
+// toggle dark mode
+const toggleStyle = ()=>{
+   
+    const togBtn = document.querySelector('#toggle-button');
+    // console.log(togBtn);
+    togBtn.addEventListener("click", function(e){
+    //  e.preventDefault();
+     console.log(togBtn);
+     if (mapStyle === mapRetro) {
+     
+         mapStyle = mapAubergine;
+         console.log(mapStyle);
+     }
+     else {
+         mapStyle = mapNavy;
+         console.log(mapStyle);
+     }
+    
+ })
+ return mapStyle;
+ }

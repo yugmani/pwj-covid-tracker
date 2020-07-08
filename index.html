@@ -11,70 +11,139 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     
     <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/toggle_style.css">
     <script src="./assets/map-style.js"></script>
     <script src="script_pie.js"></script>
     <script src="script_alter.js"></script>
     <script src="script.js"></script>
     
-</head>
+  </head>
 <body>
+  <div class="container-fluid main">
+      <div class="row first-row">
+          <div class="col-8">
+              <div class="row header-container">
+                <div class="col title-container">
+                    <h1>Covid-19</h1>
+                    <h4>Coronavirus</h4>
+                </div>
+                <div class="col search-container">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Search Location">
+                    </div>
+                </div>
+              </div>
+              <div class="row stats-container">
+                <div class="col">
+                  <div class="card" onclick="changeDataSelection('cases')">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Cases</h5>
+                      <h6 class="card-subtitle mb-2 total-number">1436886</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card active-cases-card" onclick="changeDataSelection('active')">
+                    <div class="card-body">
+                      <h5 class="card-title">Active Cases</h5>
+                      <h6 class="card-subtitle mb-2 active-number">113866</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card" onclick="changeDataSelection('recovered')">
+                    <div class="card-body">
+                      <h5 class="card-title">Recovered</h5>
+                      <h6 class="card-subtitle mb-2 recovered-number">43866</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card" onclick="changeDataSelection('deaths')">
+                    <div class="card-body">
+                      <h5 class="card-title">Deaths</h5>
+                      <h6 class="card-subtitle mb-2 deaths-number">2191</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row map-container mt-3">
+                <div class="col">
+                    <div class="map-info">
+                    
+                        <!--Google-Map container --->
+                        <div id="map"></div>
+            
+                    </div>
+                </div>
+            </div>
+          </div>
 
-    <!--Navigation bar-->
-    <div id="nav">
-
+      <!--Table for Countrywise data-->
+      <div class="col-4 country-data">
+        <!-- <div class="col-4"> -->
+          <table class="table table-striped" >
+              <thead>
+                <tr>
+                  <th scope="col">COUNTRY</th>
+                  <th scope="col">CASES</th>
+                  <th scope="col">RECOVERED</th>
+                  <th scope="col">DEATHS</th>
+                </tr>
+              </thead>
+              <tbody id="table-data">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+       
+    
+    <div class="row graph-info mb-3">
+          <!--Graph Container-->
+          <!-- "graph-info" -->
+          <div  class="col-6">
+              <canvas id="line-chart">
+              </canvas>
+          </div>
+          <div class="col-6">
+              <canvas id="pie-chart">
+              </canvas>
+          </div>
+        </div> 
     </div>
 
-    
-    <div class="map-info">
-        
-        <!--Google-Map container --->
-        <div id="map"></div>
 
-        </div>
+    <!--Navigation bar-->
+    <!-- <div id="nav">
+      <div id="toggle-button">
+        <label class="switch" >
+          <input type="checkbox"  >
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div> -->
 
-        <!--Table for Countrywise data-->
-        <div class="data-info">
-            <div class="country-data">
-            <table class="table table-striped" >
-                <thead>
-                  <tr>
-                    <th scope="col">COUNTRY</th>
-                    <th scope="col">CASES</th>
-                    <th scope="col">RECOVERED</th>
-                    <th scope="col">DEATHS</th>
-                  </tr>
-                </thead>
-                <tbody id="table-data">
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!--Graph Container-->
-            <div id="graph-info">
-              <h2>Historical Data Comparison</h2>
-              <canvas id="line-chart"></canvas>
-              <h2>Continental Comparison</h2>
-              <canvas id="pie-chart"></canvas>
-            </div>
-        </div>
-        
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkJLSTy_d7Y_EarIbeAad_1Ppm00zAF-Q&callback=initMap"
         async defer></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

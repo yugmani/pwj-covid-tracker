@@ -66,11 +66,13 @@ const buildChart = (chartData)=>{
         type: 'line',
 
         // The data for our dataset and styling of line-chart
+       
         data: {
             datasets: [
                 {
                     label: 'Cases',
-                    // backgroundColor: '#1d2c4d',
+                    backgroundColor: '#8B0000',
+                    fill:false,
                     borderColor: '#008000',
                     borderWidth: 1,
                     pointRadius: 1,
@@ -80,7 +82,8 @@ const buildChart = (chartData)=>{
                 },
                 {
                     label: 'Recovered',
-                    // backgroundColor: '#1d2c4d',
+                    backgroundColor: '#008000',
+                    fill:false,
                     borderColor: '#4B0082',
                     borderWidth: 1,
                     pointRadius: 1,
@@ -90,7 +93,8 @@ const buildChart = (chartData)=>{
                 }, 
                 {
                     label: 'Deaths',
-                    // backgroundColor: '#1d2c4d',
+                    backgroundColor: '#4B0082',
+                    fill:false,
                     borderColor: '#8B0000',
                     borderWidth: 1,
                     pointRadius: 1,
@@ -105,7 +109,13 @@ const buildChart = (chartData)=>{
         options: {
             tooltips: {
                 mode: 'index',
-                intersect: false
+                intersect: false,
+                displayColors: true
+            },
+            title: {
+                display: true,
+                text: 'Historical Comparison',
+                fontSize:30 
             },
             
             scales: {

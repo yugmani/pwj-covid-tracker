@@ -48,7 +48,17 @@ const buildPie = (pieData)=>{
                 borderWidth: 1,
                 data: pieData
                 }]
+            },
+
+            options: {
+            title: {
+                display: true,
+                text: 'Continental Comparison',
+                fontSize:30,
+                responsive:true,
+                maintainAspectRatio:false
             }
+        }
     });
 }
         
